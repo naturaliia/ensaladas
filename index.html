@@ -5,7 +5,7 @@
     <link rel="icon" type="image/svg+xml" href="img/faviconh.svg">
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>PRUEBA</title>
+<title>Ensaladas</title>
 
 <style>
     body {
@@ -265,6 +265,74 @@
   font-weight: 600;
 }
 
+.producto-card {
+  width: 280px;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  font-family: sans-serif;
+
+  
+}
+
+.producto-titulo {
+  font-size: 22px;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 16px;
+  color: #143d1d;
+}
+
+.producto-items {
+  margin-bottom: 16px;
+}
+
+.producto-item {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.producto-item span {
+  margin-right: 10px;
+  font-size: 22px;
+}
+
+.producto-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.peso {
+  background: #143d1d;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.precio {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.productos-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.productos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  max-width: 1000px;
+}
+
 </style>
 </head>
 
@@ -272,13 +340,21 @@
 
 <!-- Barra fija -->
 <div class="navbar">
+    <img src="img/NAV.png" alt="">
 </div>
 
 <!-- Secciones solo con imágenes -->
 <div class="section">
     <img src="img/img01.jpg" alt="">
 </div>
-<div id="mixList"></div>
+
+<div class="productos-wrapper">
+  <div class="productos-grid" id="productos"></div>
+</div>
+
+
+<section class="mini-productos" id="miniProductos"></section>
+
 ``
 <!-- Botón flotante de WhatsApp -->
 <a class="whatsapp-btn" 
@@ -289,56 +365,191 @@
 </a>
 
 <script>
-  // ✅ 1. DATOS (PRIMERO SIEMPRE)
-  const mixes = [
-    {
-      titulo: "MIX DE VERDURA Y VERDURA",
-      iconos: ["🥕", "🧅", "🍏"],
-      items: [
-        { emoji: "🥕", nombre: "Zanahoria" },
-        { emoji: "🧅", nombre: "Piña" },
-        { emoji: "🍏", nombre: "Manzana" }
-      ],
-      unidad: "1LB",
-      valor: 25000
-    }
-  ];
+const productos = [
+  {
+    titulo: " Mix de Frutas y Verduras",
+    peso: "1LB Aprox",
+    precio: 17500,
+    items: [
+      { nombre: "Repollo", icono: "🥦" },
+      { nombre: "Zanahoria", icono: "🥕" },
+      { nombre: "Piña", icono: "🍍" },
+      { nombre: "maicitos ", icono: "🌽" },
+      { nombre: "Manzana", icono: "🍏" },
+      { nombre: "vinagreta cremosa ", icono: "🌽" }
+      
+    ]
+  },
+  {
+    titulo: "Ensalada tipo Frisby",
+    peso: "1LB",
+    precio: 15000,
+    items: [
+      { nombre: "Repollo", icono: "🥦" },  
+      { nombre: "Zanahoria estilo clásico", icono: "🥕" },
+      { nombre: "Cebolla", icono: "🧅" },
+      { nombre: "Aderezo base de mayonesa", icono: "🍍" }
+      
+    ]
+  },
+  {
+    titulo: "Ensalada Remolacha con Zanahoria",
+    peso: "1LB",
+    precio: 12000,
+    items: [
+      { nombre: "Remolacha ", icono: "🫜" },
+      { nombre: "Zanahoria", icono: "🥕" },
+      { nombre: "Cilantro", icono: "🌿" },
+      { nombre: "Cebolla", icono: "🧅" }
+   ]
+  },
+  {
+    titulo: "Ensalada Rusa",
+    peso: "1LB",
+    precio: 18000,
+    items: [
+      { nombre: "Papa ", icono: "🥔" },
+      { nombre: "Zanahoria", icono: "🥕" },
+      { nombre: "Arveja", icono: "🌿" },
+      { nombre: "Cebolla", icono: "🧅" },
+      { nombre: "Cilantro", icono: "🌿" },
+   ]
+  },
+   {
+    titulo: "Chup Suey",
+    peso: "1LB",
+    precio: 16000,
+    items: [
+      { nombre: "+ Salsa Teriyaki ", icono: "🫙" },
+   ]
+  },
+  {
+    titulo: "Ensalada Campesina",
+    peso: "1LB",
+    precio: 15000,
+    items: [
+      { nombre: "Repollo", icono: "🥦" },
+      { nombre: "Zanahoria", icono: "🥕" },
+      { nombre: "Cebolla", icono: "🧅" },
+      { nombre: "Cilantro", icono: "🌿" },
+      { nombre: "Tomate cherry", icono: "🍅" },
+   ]
+  },
+  {
+    titulo: "Fiestera",
+    peso: "1LB",
+    precio: 16500,
+    items: [
+      { nombre: "Repollo", icono: "🥦" },
+      { nombre: "Piña", icono: "🍍" },
+      { nombre: "Manzana", icono: "🍎" },
+      { nombre: "Arandanos deshidratados", icono: "🫐" },
+   ]
+  },
+  {
+    titulo: "Tropical",
+    peso: "1LB",
+    precio: 16500,
+    items: [
+      { nombre: "Zanahoria", icono: "🥕" },
+      { nombre: "zuccini", icono: "🎃" },
+      { nombre: "Uva", icono: "🍇" },
+      { nombre: "Manzana", icono: "🍎" },
+      { nombre: "Mango", icono: "🥭" },
+      { nombre: "Tomate cherry", icono: "🍅" },
+      { nombre: "Queso", icono: "🧀" },
+   ]
+  },
+  {
+    titulo: "Pasta Tricolor",
+    peso: "1LB",
+    precio: 17000,
+    items: [
+      { nombre: "Pasta Tornillo", icono: "🔩" },
+      { nombre: "Piña", icono: "🍍" },
+      { nombre: "Mango", icono: "🥭" },
+      { nombre: "Manzana", icono: "🍎" },
+      { nombre: "Queso", icono: "🧀" },
+      { nombre: "Tocineta", icono: "🥓" },
+   ]
+  },
+   {
+    titulo: "Ensalada Clasica",
+    peso: "1LB",
+    precio: 12000,
+    items: [
+      { nombre: "Lechuga", icono: "🥬" },
+      { nombre: "Tomate", icono: "🍅" },
+      { nombre: "Cebolla", icono: "🧅" },
+      { nombre: "Aguacate", icono: "🥑" },
+      { nombre: "Vinagreta", icono: "🫙" },
+   ]
+  },
+  {
+    titulo: "Ensalada Cesar",
+    peso: "1LB",
+    precio: 18000,
+    items: [
+      { nombre: "Tostada", icono: "🍞" },
+      { nombre: "Lechuga", icono: "🥬" },
+      { nombre: "huevo", icono: "🧀" },
+      { nombre: "Aderezo", icono: "🧀" },
+   ]
+  },
+];
 
-  // ✅ 2. CONTENEDOR
-  const cont = document.getElementById("mixList");
+const container = document.getElementById("productos");
 
-  // ✅ 3. RENDER
-  mixes.forEach(mix => {
-    cont.innerHTML += `
-      <div class="mix-item">
+container.innerHTML = productos.map(producto => `
+  <div class="producto-card">
+    <div class="producto-titulo">${producto.titulo}</div>
 
-        <div class="mix-icons">
-          ${mix.iconos.map(i => `<span>${i}</span>`).join("")}
+    <div class="producto-items">
+      ${producto.items.map(item => `
+        <div class="producto-item">
+          <span>${item.icono}</span>
+          <div>${item.nombre}</div>
         </div>
+      `).join("")}
+    </div>
 
-        <div class="mix-content">
-          <h3 class="mix-title">${mix.titulo}</h3>
-
-          <ul class="mix-items">
-            ${mix.items.map(p => `
-              <li>
-                <span>${p.emoji}</span>
-                <span>${p.nombre}</span>
-              </li>
-            `).join("")}
-          </ul>
-
-          <div class="mix-footer">
-            <span class="mix-unit">${mix.unidad}</span>
-            <span class="mix-price">$${mix.valor.toLocaleString()}</span>
-          </div>
-        </div>
-
-      </div>
-    `;
-  });
+    <div class="producto-footer">
+      <div class="peso">${producto.peso}</div>
+      <div class="precio">$${producto.precio.toLocaleString()}</div>
+    </div>
+  </div>
+`).join("");
 </script>
 ``
+<script>
+    window.addEventListener("load", () => {
+        const loader = document.getElementById("preloader");
+        loader.classList.add("hidden");
+    });
+    
+const productos = [
+ 
+  
+];
+
+const cont = document.getElementById('miniProductos');
+
+productos.forEach(p => {
+  cont.innerHTML += `
+    <div class="mini-card">
+      <span class="mini-emoji">${p.emoji}</span>
+
+      <div class="mini-info">
+        <h3>${p.descripcion}</h3>
+        <div class="mini-detalle">
+          <span class="mini-unidad">${p.unidad}</span>
+          <span class="mini-valor">$${p.valor.toLocaleString()}</span>
+        </div>
+      </div>
+    </div>
+  `;
+});
+</script>
 
 </body>
 
